@@ -1,0 +1,29 @@
+name: acces_camera
+description: "A new Flutter project."
+
+publish_to: 'none'  # Supprime cette ligne si tu veux publier sur pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.7.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  camera: ^0.10.0+2
+  permission_handler: ^11.0.1   # Met à jour vers la dernière version
+  cupertino_icons: ^1.0.8
+  qr_code_scanner: ^1.0.1
+  mobile_scanner: ^6.0.7
+  flutter_barcode_scanner: ^2.0.0
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
