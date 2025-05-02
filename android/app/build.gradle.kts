@@ -1,41 +1,63 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    // Le plugin Flutter Gradle doit être appliqué après les plugins Android et Kotlin.
+    id("com.android.application") version "8.7.0"
+    id("kotlin-android") version "1.8.0"
     id("dev.flutter.flutter-gradle-plugin")
+    id("org.jetbrains.kotlin.android") version "1.x.x"
 }
 
-android {
-    namespace = "com.example.acces_camera"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"  // Ajoute la version du NDK ici dans la section android.
+    android {
+        compileSdkVersion(33)  // Exemple
+        defaultConfig {
+            applicationId = "com.example.votreapp"
+            minSdkVersion(21)
+            targetSdkVersion(34)  // Ici, vous modifiez cette ligne
+            versionCode = 1
+            versionName = "1.0"
+        }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+            isCoreLibraryDesugaringEnabled = true // Activation du desugaring
+        }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
+        packagingOptions {
+            resources {
+                excludes += "META-INF/gradle/incremental.annotation.processing.lock"
+            }
+            jniLibs {
+                excludes += "lib/some-lib.so"
+            }
+        }
 
-    defaultConfig {
-        // Définir l'identifiant unique de l'application (ID de l'application).
-        applicationId = "com.example.acces_camera"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-    }
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+        }
 
-    buildTypes {
-        release {
-            // Configurer la signature de l'application pour la version de production
-            signingConfig = signingConfigs.getByName("debug")
+        defaultConfig {
+            applicationId = "com.example.acces_camera"
+            minSdk = 21
+            targetSdk = 34
+            versionCode = 1
+            versionName = "1.0"
+        }
+        buildTypes {
+            release {
+                isMinifyEnabled = false
+                proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            }
         }
     }
-}
 
-flutter {
-    source = "../.."
-}
+    dependencies {
+        // Ajout de la dépendance desugar_jdk_libs pour activer le desugaring
+        implementation("com.android.tools:desugar_jdk_libs:2.0.4")
+        implementation("androidx.core:core-ktx:1.12.0")
+        implementation("androidx.appcompat:appcompat:1.6.1")
+        implementation("com.google.android.material:material:1.10.0")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.0")
+        implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    }

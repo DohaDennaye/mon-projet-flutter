@@ -4,7 +4,9 @@
 
     <!-- Permission d'accès à la caméra -->
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
     <application
@@ -31,6 +33,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <uses-feature android:name="android.hardware.camera" android:required="false"/>
+        <uses-feature android:name="android.hardware.camera.autofocus"/>
     </application>
 
 </manifest>
